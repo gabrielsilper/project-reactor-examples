@@ -12,11 +12,30 @@ public class YoutubeChannel {
         this.videos = new ArrayList<>();
     }
 
+    public YoutubeChannel(List<Video> videos) {
+        this.videos = videos;
+    }
+
     public void addVideo(Video video) {
         videos.add(video);
     }
 
     public Flux<Video> getAllVideos() {
         return Flux.fromIterable(videos);
+    }
+
+    public Flux<Video> getAllVideos(long numberOfVideos) {
+        return Flux.fromIterable(videos)
+                .take(numberOfVideos);
+    }
+
+    public Flux<Integer> getAllVideosViews() {
+        return Flux.fromIterable(videos)
+                .map(Video::getViews);
+    }
+
+    public Flux<String> getAllVideosNames() {
+        return Flux.fromIterable(videos)
+                .map(Video::getName);
     }
 }
