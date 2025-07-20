@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.stream.Stream;
 
 @DisplayName("Operators Test - Tests to understand Flux and Mono Operators")
-public class OperatorsTest {
+public class SimpleOperatorsTest {
 
     @Test
     public void fluxJust() {
@@ -59,6 +59,16 @@ public class OperatorsTest {
         StepVerifier
                 .create(simpleFlux)
                 .expectNext(1, 2, 3, 4)
+                .verifyComplete();
+    }
+
+    @Test
+    public void monoJust() {
+        Flux<Integer> simpleFlux = Flux.just(1);
+
+        StepVerifier
+                .create(simpleFlux)
+                .expectNext(1)
                 .verifyComplete();
     }
 }
