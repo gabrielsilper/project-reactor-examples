@@ -1,5 +1,7 @@
 package com.github.gabrielsilper.project_reactor_examples.models;
 
+import reactor.core.publisher.Mono;
+
 public class Video {
     private String name;
     private String description;
@@ -43,5 +45,10 @@ public class Video {
 
     public void setViews(Integer views) {
         this.views = views;
+    }
+
+    public Mono<Video> giveLike() {
+        this.likes++;
+        return Mono.just(this);
     }
 }
