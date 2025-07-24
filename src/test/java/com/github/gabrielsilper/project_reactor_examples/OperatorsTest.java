@@ -189,4 +189,16 @@ public class OperatorsTest {
                 .map(Video::getName)
                 .map(String::toUpperCase);
     }
+
+    @Test
+    public void sideEffects() {
+        YoutubeChannel channel = new YoutubeChannel(MockVideo.getMockVideos());
+
+        channel.getAllVideosNames()
+                .log()
+                .doAfterTerminate(() -> System.out.println("Stream finished"))
+                .doOnTerminate(() -> System.out.println("Stream completed"))
+                .doFinally(signalType -> System.out.println("Stream ended with signal: " + signalType))
+                .subscribe();
+    }
 }
