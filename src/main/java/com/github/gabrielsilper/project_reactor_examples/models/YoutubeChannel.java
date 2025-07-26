@@ -43,9 +43,4 @@ public class YoutubeChannel {
         return Flux.fromIterable(videos)
                 .filter(video -> video.getLikes() >= rate);
     }
-
-    public Flux<Double> getAllVideosMonetization() {
-        return Flux.fromIterable(videos)
-                .map(Video::getMonetization);
-    }
 }
