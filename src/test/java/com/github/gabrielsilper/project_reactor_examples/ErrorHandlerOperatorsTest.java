@@ -87,4 +87,20 @@ public class ErrorHandlerOperatorsTest {
                 .subscribe(video -> System.out.println("Monetization: $" + video),
                         error -> log.error("Error in subscription: {}", error.getMessage()));
     }
+
+    @Test
+    public void EmptyMonetization() {
+        YoutubeChannel channel = new YoutubeChannel(MockVideo.getMockVideosWithNullViews());
+        YoutubeChannelService channelService = new YoutubeChannelService();
+
+        channelService.getAllVideosMonetizationAsync(channel)
+                .defaultIfEmpty(0.0)
+                .log()
+                .subscribe(video -> System.out.println("Monetization: $" + video));
+
+        channelService.getAllVideosMonetizationAsync(channel)
+                .switchIfEmpty(Flux.just(0.0))
+                .log()
+                .subscribe(video -> System.out.println("Monetization: $" + video));
+    }
 }

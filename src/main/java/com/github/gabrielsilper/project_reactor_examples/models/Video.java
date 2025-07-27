@@ -51,8 +51,4 @@ public class Video {
         this.likes++;
         return Mono.just(this);
     }
-
-    public Double getMonetization() {
-        return this.views * 0.2;
-    }
 }

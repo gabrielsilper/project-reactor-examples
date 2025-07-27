@@ -11,7 +11,7 @@ public class MonetizationService {
     }
 
     public Mono<Double> calculateMonetizationAsync(Video video) {
-        // just to test and use defaultIfEmpty
+        // just to test and use empty operators
         if (video.getViews() == null) {
             return Mono.empty();
         }
