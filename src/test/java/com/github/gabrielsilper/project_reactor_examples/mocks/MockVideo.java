@@ -45,7 +45,7 @@ public class MockVideo {
                 new Video("Video 15", "Description 15", 1000, 10000),
                 new Video("Video 16", "Description 16", 2000, null),
                 new Video("Video 17", "Description 17", 3000, 30000),
-                new Video("Video 17", "Description 18", 4000, null)
+                new Video("Video 18", "Description 18", 4000, null)
         );
     }
 }

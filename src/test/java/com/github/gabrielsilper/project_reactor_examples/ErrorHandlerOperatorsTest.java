@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import reactor.core.publisher.Flux;
+import reactor.util.retry.Retry;
 
 public class ErrorHandlerOperatorsTest {
 
@@ -89,7 +90,7 @@ public class ErrorHandlerOperatorsTest {
     }
 
     @Test
-    public void EmptyMonetization() {
+    public void emptyMonetization() {
         YoutubeChannel channel = new YoutubeChannel(MockVideo.getMockVideosWithNullViews());
         YoutubeChannelService channelService = new YoutubeChannelService();
 
@@ -98,9 +99,19 @@ public class ErrorHandlerOperatorsTest {
                 .log()
                 .subscribe(video -> System.out.println("Monetization: $" + video));
 
-        channelService.getAllVideosMonetizationAsync(channel)
-                .switchIfEmpty(Flux.just(0.0))
-                .log()
+//        channelService.getAllVideosMonetizationAsync(channel)
+//                .switchIfEmpty(Flux.just(0.0))
+//                .log()
+//                .subscribe(video -> System.out.println("Monetization: $" + video));
+    }
+
+    @Test
+    public void retryMonetization() {
+        YoutubeChannel channel = new YoutubeChannel(MockVideo.getMockVideos());
+        YoutubeChannelService channelService = new YoutubeChannelService();
+
+        channelService.getAllVideosMonetizationWithRateAsync(channel)
+                .retryWhen(Retry.max(3))
                 .subscribe(video -> System.out.println("Monetization: $" + video));
     }
 }
