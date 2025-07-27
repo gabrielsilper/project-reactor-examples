@@ -30,4 +30,21 @@ public class MockVideo {
                 new Video("Video 10", "Description 10", 10000, 100000)
         );
     }
+
+    public static List<Video> getMockVideosWithLowViews() {
+        return List.of(
+                new Video("Video 11", "Description 11", 300, 3000),
+                new Video("Video 12", "Description 12", 100, 1000),
+                new Video("Video 13", "Description 13", 400, 4000),
+                new Video("Video 14", "Description 14", 200, 2000)
+        );
+    }
+
+    public static List<Video> getMockVideosWithNullViews() {
+        return List.of(
+                new Video("Video 15", "Description 15", 1000, null),
+                new Video("Video 16", "Description 16", 2000, null),
+                new Video("Video 17", "Description 17", 3000, null)
+        );
+    }
 }

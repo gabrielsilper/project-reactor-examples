@@ -11,8 +11,13 @@ public class MonetizationService {
     }
 
     public Mono<Double> calculateMonetizationAsync(Video video) {
+        // just to test and use defaultIfEmpty
+        if (video.getViews() == null) {
+            return Mono.empty();
+        }
+
         if (video.getViews() < 1500){
-            throw new VideoMonetizationException("Video views are too low for monetization");
+            throw new VideoMonetizationException();
         }
 
         return Mono.just(video.getViews() * 0.2);
